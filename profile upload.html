@@ -2,7 +2,7 @@
 <html>
    <head>
       <link rel="icon" type="image/png" href="https://cdn.glitch.com/097f7b3f-8561-4dc8-a4e0-df8a5c6a4dbb%2Fsite%20logo.png?v=1595598726659"/>
-      <title>WiresBoy - About</title>
+      <title>WiresBoy - Account</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel = "stylesheet" type = "text/css" href = "styles.css" />
    </head>
@@ -120,6 +120,61 @@
          width: 100%;
       }
 
+            /* Extra style for the cancel button (red) */
+            .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+      }
+
+      /* Avatar image */
+      img.avatar {
+        width: 40%;
+        border-radius: 50%;
+      }
+
+      /* Add padding to containers */
+      .container {
+        padding: 16px;
+      }
+
+      /* The "Forgot password" text */
+      span.psw {
+        float: right;
+        padding-top: 16px;
+      }
+
+      @media screen and (max-width: 300px) {
+        span.psw {
+          display: block;
+          float: none;
+        }
+        .cancelbtn {
+          width: 100%;
+        }
+      }
+
+            /* Full-width inputs */
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      /* Set a style for all buttons */
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+
       .login {background-color: transparent; color: white;}
       .button1 {border-radius: 2px;}
       .button2 {border-radius: 4px;}
@@ -134,6 +189,9 @@
       .Rowdies{font-family: 'Rowdies', cursive; color: azure;}
       .title{font-size: 100px;}
       .text{font-size: 50px;}
+      .grid-container {display: grid; grid-column-gap: 50px; grid-row-gap: 50px;}
+      .grid-item{grid-row-start: 1; grid-row-end: 1;}
+      .username{top: 50%;}
    </style>
    <header>
       <div class="container">
@@ -148,11 +206,33 @@
          </nav>
        </div>
    </header>
+   <script>
+      function getUrlParam(parameter, defaultValue) {
+         const urlParams = new URLSearchParams(window.location.search);
+         return urlParams.get(parameter) || defaultValue;
+      }
+
+      var code = getUrlParam('logcode', 'na')
+      var user = getUrlParam('uname', 'na')
+
+      window.onload = function(){
+         document.getElementById("uname").innerHTML = user;
+         document.getElementById("userpfp").src = "/userpfp/" + user;
+      };
+
+      if(code === "na"){
+         window.location.href = "signin.html"
+      }
+   </script>
    <body>
       <div class="div2">
          <h1 class="Rowdies title"><b>WiresBoy</b></h1>
          <br>
-         <p class="Rowdies text"></p>
+            <form enctype="multipart/form-data" action="uploader.php" method="POST">
+            <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+            Choose a file to upload: <input name="uploadedfile" type="file" /><br />
+            <input type="submit" value="Upload File" />
+            </form>
          <br>
       </div>
    </body>
